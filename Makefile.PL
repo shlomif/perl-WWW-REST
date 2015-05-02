@@ -1,14 +1,14 @@
 #!/usr/bin/env perl
-# $File: //member/autrijus/WWW-REST/Makefile.PL $ $Author: autrijus $
-# $Revision: #2 $ $Change: 8517 $ $DateTime: 2003/10/21 07:06:33 $
 
 use 5.006;
 use inc::Module::Install;
 
-author		('Autrijus Tang (autrijus@autrijus.org)');
+author		('Audrey Tang <audreyt@audreyt.org>');
 name		('WWW-REST');
 abstract	('Base class for REST resources');
+perl_version    ('5.006');
 version_from	('lib/WWW/REST.pm');
+license         ('CC0');
 
 include_deps	('Test::More', 5.006);
 build_requires	('Test::More', 0);
@@ -20,8 +20,4 @@ requires(
     'Class::Struct'	    => 0,
 );
 
-sign(1);
-
-&Meta->write;
-&Makefile->write;
-
+WriteAll( sign => 1 );

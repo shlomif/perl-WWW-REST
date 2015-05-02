@@ -1,11 +1,12 @@
 #!/usr/bin/perl
-# $File: //member/autrijus/WWW-REST/t/0-signature.t $ $Author: autrijus $
-# $Revision: #1 $ $Change: 8516 $ $DateTime: 2003/10/21 07:04:37 $
 
 use strict;
 print "1..1\n";
 
-if (!-s 'SIGNATURE') {
+if (!$ENV{TEST_SIGNATURE}) {
+    print "ok 1 # skip set the environment variable TEST_SIGNATURE to enable this test\n";
+}
+elsif (!-s 'SIGNATURE') {
     print "ok 1 # skip No signature file found\n";
 }
 elsif (!eval { require Module::Signature; 1 }) {

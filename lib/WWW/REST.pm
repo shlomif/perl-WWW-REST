@@ -1,8 +1,6 @@
-# $File: //member/autrijus/WWW-REST/lib/WWW/REST.pm $ $Author: autrijus $
-# $Revision: #4 $ $Change: 8518 $ $DateTime: 2003/10/21 07:12:23 $
-
+use 5.006;
 package WWW::REST;
-$WWW::REST::VERSION = '0.01';
+$WWW::REST::VERSION = '0.011';
 
 use strict;
 use vars '$AUTOLOAD';
@@ -23,8 +21,8 @@ WWW::REST - Base class for REST resources
 
 =head1 VERSION
 
-This document describes version 0.01 of WWW::REST, released
-October 21, 2003.
+This document describes version 0.011 of WWW::REST, released
+May 2, 2015.
 
 =head1 SYNOPSIS
 
@@ -210,10 +208,8 @@ sub dir {
 
 =head1 NOTES
 
-This module is considered highly experimental.  The API may change
-without notice; suggestions are most welcome.
-
-The documentation you are reading really needs a rewrite. :-)
+This module is considered highly experimental and essentially
+unmaintained; it's kept on CPAN for historical purposes.
 
 =cut
 
@@ -227,15 +223,15 @@ L<URI>, L<LWP::UserAgent>, L<HTTP::Response>
 
 =head1 AUTHORS
 
-Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>
+Audrey Tang E<lt>cpan@audreyt.orgE<gt>
 
-=head1 COPYRIGHT
+=head1 CC0 1.0 Universal
 
-Copyright 2003 by Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>.
+To the extent possible under law, 唐鳳 has waived all copyright and related
+or neighboring rights to L<WWW::REST>.
 
-This program is free software; you can redistribute it and/or 
-modify it under the same terms as Perl itself.
+This work is published from Taiwan.
 
-See L<http://www.perl.com/perl/misc/Artistic.html>
+L<http://creativecommons.org/publicdomain/zero/1.0>
 
 =cut
