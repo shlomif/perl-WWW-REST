@@ -15,6 +15,8 @@ use constant METHODS => qw(options get head post put delete trace connect);
 
 Class::Struct::struct(map { $_ => '$' } +MEMBERS);
 
+=encoding utf-8
+
 =head1 NAME
 
 WWW::REST - Base class for REST resources
@@ -30,17 +32,17 @@ May 2, 2015.
     use WWW::REST;
     $url = WWW::REST->new("http://nntp.x.perl.org/rss/perl.par.rdf");
     $url->dispatch( sub {
-	my $self = shift;
-	die $self->status_line if $self->is_error;
-	my $rss = XML::RSS->new;
-	$rss->parse($self->content);
-	return $rss;
+        my $self = shift;
+        die $self->status_line if $self->is_error;
+        my $rss = XML::RSS->new;
+        $rss->parse($self->content);
+        return $rss;
     });
     $url->get( last_n => 10 )->save("par.rdf");
     $url->url("perl.perl5.porters.rdf")->get->save("p5p.rdf");
-    warn $url->dir->as_string;	  # "http://nntp.x.perl.org/rss/"
+    warn $url->dir->as_string;    # "http://nntp.x.perl.org/rss/"
     warn $url->parent->as_string; # "http://nntp.x.perl.org/"
-    $url->delete;		  # dies with "405 Method Not Allowed"
+    $url->delete;                 # dies with "405 Method Not Allowed"
 
 =head1 DESCRIPTION
 
@@ -68,7 +70,7 @@ my $old_new = \&new;
     $self->_uri( URI->new($uri) );
     $self->_uri( $self->_uri->abs($obj->_uri) ) if ref($obj);
     $self->_ua(
-	ref($obj) ? $obj->_ua : LWP::UserAgent->new( cookie_jar => {}, @_)
+        ref($obj) ? $obj->_ua : LWP::UserAgent->new( cookie_jar => {}, @_)
     );
     $self->dispatch( $obj->dispatch ) if ref($obj);
     return $self;
@@ -101,10 +103,10 @@ sub AUTOLOAD {
     my $self = shift;
     $AUTOLOAD =~ s/^.*:://;
     foreach my $delegate (+MEMBERS) {
-	my $obj = $self->can($delegate)->($self);
-	my $code = UNIVERSAL::can($obj, $AUTOLOAD) or next;
-	unshift @_, $obj;
-	goto &$code;
+        my $obj = $self->can($delegate)->($self);
+        my $code = UNIVERSAL::can($obj, $AUTOLOAD) or next;
+        unshift @_, $obj;
+        goto &$code;
     }
     die "No such method: $AUTOLOAD";
 }
@@ -114,13 +116,13 @@ sub DESTROY {}
 sub _request {
     my $method = uc(+shift);
     sub {
-	my $self = shift;
-	$self->query_form(@_);
-	my $request = _simple_req( $method, $self->as_string );
-	my $res = $self->_ua->request($request);
-	$self->_res($res);
-	my $dispatch = $self->dispatch or return $self;
-	return $dispatch->($self);
+        my $self = shift;
+        $self->query_form(@_);
+        my $request = _simple_req( $method, $self->as_string );
+        my $res = $self->_ua->request($request);
+        $self->_res($res);
+        my $dispatch = $self->dispatch or return $self;
+        return $dispatch->($self);
     };
 }
 
@@ -130,11 +132,11 @@ sub _simple_req
     my $req = HTTP::Request->new($method => $url);
     my($k, $v);
     while (($k,$v) = splice(@_, 0, 2)) {
-	if (lc($k) eq 'content') {
-	    $req->add_content($v);
-	} else {
-	    $req->push_header($k, $v);
-	}
+        if (lc($k) eq 'content') {
+            $req->add_content($v);
+        } else {
+            $req->push_header($k, $v);
+        }
     }
     $req;
 }
@@ -149,8 +151,8 @@ to it instead, and returns its return value.
 
 BEGIN {
     foreach my $method (+METHODS) {
-	no strict 'refs';
-	*$method = _request($method) unless $method eq 'post';
+        no strict 'refs';
+        *$method = _request($method) unless $method eq 'post';
     }
 }
 
