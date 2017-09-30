@@ -1,6 +1,6 @@
 use 5.006;
 package WWW::REST;
-$WWW::REST::VERSION = '0.011';
+# $WWW::REST::VERSION = '0.011';
 
 use strict;
 use vars '$AUTOLOAD';
@@ -20,11 +20,6 @@ Class::Struct::struct(map { $_ => '$' } +MEMBERS);
 =head1 NAME
 
 WWW::REST - Base class for REST resources
-
-=head1 VERSION
-
-This document describes version 0.011 of WWW::REST, released
-May 2, 2015.
 
 =head1 SYNOPSIS
 
@@ -47,7 +42,7 @@ May 2, 2015.
 =head1 DESCRIPTION
 
 This module is a mixin of L<URI>, L<LWP::UserAgent>, L<HTTP::Response>
-and an user-defined dispatch module.  It is currently just a proof of
+and a user-defined dispatch module.  It is currently just a proof of
 concept for a resource-oriented API framework, also known as B<REST>
 (Representational State Transfer).
 
@@ -55,7 +50,7 @@ concept for a resource-oriented API framework, also known as B<REST>
 
 =head2 WWW::REST->new($string, @args)
 
-Constructor (class method).  Takes an URL string, returns a WWW::REST
+Constructor (class method).  Takes a URL string, returns a WWW::REST
 object.  The optional arguments are passed to LWP::UserAgent->new.
 
 =cut
@@ -78,9 +73,9 @@ my $old_new = \&new;
 
 =head2 $url->url($string)
 
-Constructor (instance method).  Takes an URL string, which may be
+Constructor (instance method).  Takes a URL string, which may be
 relative to the object's URL.  Returns a WWW::REST object, which
-inherits the same ua and dispatcher.
+inherits the same ua (= user-agent) and dispatcher.
 
 =cut
 
@@ -95,7 +90,7 @@ Gets or sets the dispatch code reference.
 Gets or sets the embedded URI, LWP::UserAgent and HTTP::Response
 objects respectively.  Note that C<$url> can automatically delegate
 method calls to embedded objects, so normally you won't need to call
-those method explicitly.
+those methods explicitly.
 
 =cut
 
@@ -143,7 +138,7 @@ sub _simple_req
 
 =head2 $url->get(%args), $url->post(%args), $url->head(%args), $url->put(%args), $url->delete(%args), $url->options(%args), $url->trace(%args), $url->connect(%args)
 
-Performs the corresponding operation to the object; returns the object
+Performs the corresponding operation on the object; returns the object
 itself.  If C<dispatch> is set to a code reference, the object is passed
 to it instead, and returns its return value.
 
@@ -211,7 +206,7 @@ sub dir {
 =head1 NOTES
 
 This module is considered highly experimental and essentially
-unmaintained; it's kept on CPAN for historical purposes.
+unmaintained; it's kept on CPAN for historical reasons.
 
 =cut
 
@@ -226,6 +221,8 @@ L<URI>, L<LWP::UserAgent>, L<HTTP::Response>
 =head1 AUTHORS
 
 Audrey Tang E<lt>cpan@audreyt.orgE<gt>
+
+Shlomi Fish, L<http://www.shlomifish.org/> .
 
 =head1 CC0 1.0 Universal
 
